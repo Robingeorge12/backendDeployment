@@ -1,5 +1,6 @@
 const express = require("express")
 const app = express()
+const {connection} = require("./db")
 require('dotenv').config()
 const PORT = process.env.PORT || 7003
 
@@ -12,6 +13,13 @@ app.get("/about" ,(req,res)=>{
 })
 
 
-app.listen(PORT,()=>{
+app.listen(PORT,async ()=>{
+
+    try{
+        await connection
+        console.log("connected")
+    }catch(er){
+        console.log("Error")
+    }
     console.log(`${PORT} Port`)
 })
